@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -154,6 +155,6 @@ fun MiracleListInset(modifier: Modifier = Modifier, height: Dp = 1.dp) {
             .padding(start = 76.dp)
             .alpha(0.55f)
             .background(MaterialTheme.colorScheme.outlineVariant)
-            .size(height)
+            .height(height)
     )
 }
