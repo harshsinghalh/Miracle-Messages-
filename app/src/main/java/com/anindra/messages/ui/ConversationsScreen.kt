@@ -1207,11 +1207,12 @@ internal fun ConversationRow(
         if (selectionMode && selected) context.getString(R.string.contact_selected) else null
     )
     Box(modifier = modifier.fillMaxWidth()) {
+        val rowShape = RoundedCornerShape(if (convo.unreadCount > 0) 24.dp else 20.dp)
         val pinnedTint = when {
-            selected && selectionMode -> MaterialTheme.colorScheme.surfaceContainerHighest
+            selected && selectionMode -> MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.78f)
             convo.pinned && settings.pinnedEnabled ->
-                MaterialTheme.colorScheme.surfaceContainerLow.copy(alpha = 0.6f)
-            else -> MaterialTheme.colorScheme.background
+                MaterialTheme.colorScheme.surfaceContainerHigh.copy(alpha = 0.72f)
+            else -> MaterialTheme.colorScheme.surfaceContainerLow.copy(alpha = 0.34f)
         }
 
         Row(
@@ -1234,8 +1235,9 @@ internal fun ConversationRow(
                     onClick = onClick,
                     onLongClick = onLongClick
                 )
+                .clip(rowShape)
                 .background(pinnedTint)
-                .padding(horizontal = 16.dp, vertical = 12.dp),
+                .padding(horizontal = 16.dp, vertical = 13.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
             PersonAvatar(
@@ -1248,7 +1250,7 @@ internal fun ConversationRow(
                     Text(
                         text = senderLabel,
                         style = MaterialTheme.typography.bodyLarge,
-                        fontWeight = FontWeight.Normal,
+                        fontWeight = if (convo.unreadCount > 0) FontWeight.SemiBold else FontWeight.Medium,
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis,
                         modifier = Modifier.weight(1f, fill = false)
@@ -1282,7 +1284,7 @@ internal fun ConversationRow(
                         style = MaterialTheme.typography.bodyMedium,
                         fontWeight = FontWeight.Normal,
                         color = if (convo.unreadCount > 0) MaterialTheme.colorScheme.onSurface
-                        else MaterialTheme.colorScheme.onSurfaceVariant,
+                        else MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.88f),
                         maxLines = 1
                     )
                 }
