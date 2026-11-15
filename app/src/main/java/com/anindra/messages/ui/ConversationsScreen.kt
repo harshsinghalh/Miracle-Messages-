@@ -133,6 +133,9 @@ import com.anindra.messages.ui.theme.motionSpring
 import com.anindra.messages.ui.theme.motionTween
 import com.anindra.messages.ui.theme.startChatContainer
 import com.anindra.messages.ui.theme.startChatContent
+import com.anindra.messages.ui.design.MiracleIconButton
+import com.anindra.messages.ui.design.MiracleTokens
+import com.anindra.messages.ui.design.miracleGlass
 import com.anindra.messages.AppViewModel
 import com.anindra.messages.R
 import com.anindra.messages.hideUrls
@@ -481,14 +484,17 @@ fun ConversationsScreen(
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(ConversationHeader.HEIGHT)
-                    .padding(horizontal = 16.dp),
+                    .height(ConversationHeader.HEIGHT + 12.dp)
+                    .padding(horizontal = MiracleTokens.PageHorizontal),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 if (searching) {
-                    IconButton(onClick = { searching = false; query = "" }) {
-                        Icon(Icons.AutoMirrored.Rounded.ArrowBack, stringResource(R.string.icon_close_search))
-                    }
+                    MiracleIconButton(
+                        icon = Icons.AutoMirrored.Rounded.ArrowBack,
+                        contentDescription = stringResource(R.string.icon_close_search),
+                        onClick = { searching = false; query = "" }
+                    )
+                    Spacer(Modifier.width(10.dp))
                     val focusRequester = remember { FocusRequester() }
                     LaunchedEffect(Unit) { focusRequester.requestFocus() }
                     TextField(
@@ -496,9 +502,10 @@ fun ConversationsScreen(
                         onValueChange = { query = it },
                         placeholder = { Text(stringResource(R.string.conversations_search)) },
                         singleLine = true,
+                        shape = RoundedCornerShape(MiracleTokens.Radius),
                         colors = TextFieldDefaults.colors(
-                            focusedContainerColor = Color.Transparent,
-                            unfocusedContainerColor = Color.Transparent,
+                            focusedContainerColor = MaterialTheme.colorScheme.surfaceContainerHigh.copy(alpha = 0.72f),
+                            unfocusedContainerColor = MaterialTheme.colorScheme.surfaceContainerHigh.copy(alpha = 0.56f),
                             focusedIndicatorColor = Color.Transparent,
                             unfocusedIndicatorColor = Color.Transparent
                         ),
@@ -506,34 +513,58 @@ fun ConversationsScreen(
                     )
                 } else {
                     if (showArchived) {
-                        IconButton(onClick = { showArchived = false }) {
-                            Icon(Icons.AutoMirrored.Rounded.ArrowBack, stringResource(R.string.icon_back_to_inbox))
-                        }
+                        MiracleIconButton(
+                            icon = Icons.AutoMirrored.Rounded.ArrowBack,
+                            contentDescription = stringResource(R.string.icon_back_to_inbox),
+                            onClick = { showArchived = false }
+                        )
+                        Spacer(Modifier.width(12.dp))
                         Text(
                             stringResource(R.string.conversations_archived),
                             style = MaterialTheme.typography.headlineSmall,
+                            fontWeight = FontWeight.SemiBold,
                             modifier = Modifier.weight(1f)
                         )
                     } else {
-                        Text(
-                            stringResource(R.string.conversations_messages),
-                            style = MaterialTheme.typography.headlineSmall,
-                            modifier = Modifier.weight(1f)
-                        )
-                        if (showArchiving) {
-                            IconButton(onClick = { showArchived = true }) {
-                                Icon(Icons.Rounded.Archive, stringResource(R.string.conversations_archived))
-                            }
-                        }
-                        IconButton(onClick = { searching = true }) {
-                            Icon(Icons.Outlined.Search, stringResource(R.string.icon_search))
-                        }
-                        IconButton(onClick = onOpenSettings) {
-                            OwnerAvatar(
-                                size = 32.dp,
-                                backgroundColor = MaterialTheme.colorScheme.primary,
-                                tint = MaterialTheme.colorScheme.onPrimary
+                        Column(Modifier.weight(1f)) {
+                            Text(
+                                stringResource(R.string.conversations_messages),
+                                style = MaterialTheme.typography.headlineSmall,
+                                fontWeight = FontWeight.SemiBold
                             )
+                            Text(
+                                "Your conversations, beautifully organized",
+                                style = MaterialTheme.typography.labelSmall,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant
+                            )
+                        }
+                        if (showArchiving) {
+                            MiracleIconButton(
+                                icon = Icons.Rounded.Archive,
+                                contentDescription = stringResource(R.string.conversations_archived),
+                                onClick = { showArchived = true }
+                            )
+                            Spacer(Modifier.width(8.dp))
+                        }
+                        MiracleIconButton(
+                            icon = Icons.Outlined.Search,
+                            contentDescription = stringResource(R.string.icon_search),
+                            onClick = { searching = true }
+                        )
+                        Spacer(Modifier.width(8.dp))
+                        Surface(
+                            onClick = onOpenSettings,
+                            shape = RoundedCornerShape(16.dp),
+                            color = MaterialTheme.colorScheme.surfaceContainerHigh.copy(alpha = 0.68f),
+                            modifier = Modifier.size(44.dp)
+                        ) {
+                            Box(contentAlignment = Alignment.Center) {
+                                OwnerAvatar(
+                                    size = 34.dp,
+                                    backgroundColor = MaterialTheme.colorScheme.primaryContainer,
+                                    tint = MaterialTheme.colorScheme.onPrimaryContainer
+                                )
+                            }
                         }
                     }
                 }
