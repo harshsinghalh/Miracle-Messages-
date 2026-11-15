@@ -1,4 +1,4 @@
-name: Develop Build (manual)
+name: Miracle Messages APK Build
 
 on:
   workflow_dispatch:
@@ -84,13 +84,13 @@ jobs:
             kind=debug
           fi
           refsafe=$(echo "${GITHUB_REF_NAME}" | tr '/' '_')
-          name="Messages-${{ steps.ver.outputs.version }}-${kind}-${refsafe}-${GITHUB_SHA::7}.apk"
+          name="Miracle-Messages-${{ steps.ver.outputs.version }}-${kind}-${refsafe}-${GITHUB_SHA::7}.apk"
           cp "$src" "$name"
           sha=$(sha256sum "$name" | cut -d' ' -f1)
           echo "file=$name" >> "$GITHUB_OUTPUT"
           echo "sha=$sha" >> "$GITHUB_OUTPUT"
           {
-            echo "### Test build"
+            echo "### Miracle Messages build"
             echo ""
             echo "- Version: \`${{ steps.ver.outputs.version }}\` ($kind)"
             echo "- Branch: \`${GITHUB_REF_NAME}\` @ \`${GITHUB_SHA::7}\`"
