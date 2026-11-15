@@ -1,6 +1,9 @@
 name: Miracle Messages APK Build
 
 on:
+  push:
+    branches:
+      - codex/aether-miracle-messages-redesign
   workflow_dispatch:
 
 permissions:
