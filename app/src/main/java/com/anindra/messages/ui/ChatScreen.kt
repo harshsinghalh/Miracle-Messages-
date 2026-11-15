@@ -544,7 +544,7 @@ internal fun ChatBubble(
                         color = if (isSelected) cs.selectedBubble else if (msg.isMe) cs.outgoingBubble else cs.incomingBubble,
                         shape = corners.toShape(),
                         border = if (isSearchFocus) BorderStroke(2.dp, cs.primary.copy(alpha = searchHighlightAlpha)) else null,
-                        modifier = Modifier.widthIn(max = 300.dp).combinedClickable(
+                        modifier = Modifier.widthIn(max = 320.dp).combinedClickable(
                             onClick = { onTap() },
                             onLongClick = { onLongPress() }
                         )
@@ -3188,8 +3188,8 @@ fun MessageRow(
                     if (msg.body.isNotBlank()) {
                         Surface(
                             color = if (isSelected) cs.selectedBubble else if (msg.isMe) cs.outgoingBubble else cs.incomingBubble,
-                            shape = RoundedCornerShape(16.dp),
-                            modifier = Modifier.widthIn(max = 260.dp).padding(top = 2.dp)
+                            shape = RoundedCornerShape(if (msg.isMe) 22.dp else 18.dp),
+                            modifier = Modifier.widthIn(max = 280.dp).padding(top = 2.dp)
                                 .combinedClickable(
                                     onClick = {},
                                     onLongClick = { onLongPress() }
