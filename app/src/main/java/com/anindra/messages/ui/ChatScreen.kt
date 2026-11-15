@@ -218,6 +218,7 @@ import com.anindra.messages.data.SimCards
 import com.anindra.messages.data.SimSwitcher
 import com.anindra.messages.voice.VoiceNotePolicy
 import com.anindra.messages.voice.VoicePlayback
+import com.anindra.messages.ui.design.MiracleIconButton
 import com.anindra.messages.voice.VoiceRecorder
 import com.anindra.messages.data.MessageLockCrypto
 import androidx.compose.ui.res.painterResource
@@ -2479,9 +2480,11 @@ internal fun ChatTopBar(
             containerColor = MaterialTheme.colorScheme.chatBar
         ),
         navigationIcon = {
-            IconButton(onClick = onBack) {
-                Icon(Icons.AutoMirrored.Rounded.ArrowBack, stringResource(R.string.icon_back))
-            }
+            MiracleIconButton(
+                icon = Icons.AutoMirrored.Rounded.ArrowBack,
+                contentDescription = stringResource(R.string.icon_back),
+                onClick = onBack
+            )
         },
         title = {
             Row(
@@ -2503,6 +2506,7 @@ internal fun ChatTopBar(
                                 else BidiText.ltr(it.display)
                             } ?: "",
                             style = MaterialTheme.typography.titleMedium,
+                            fontWeight = FontWeight.SemiBold,
                             maxLines = 1,
                             // A group title lists every member, so it is almost
                             // always longer than the bar. Clipped at the comma it
@@ -2526,16 +2530,22 @@ internal fun ChatTopBar(
             }
         },
         actions = {
-            IconButton(onClick = {
-                convo?.address?.let {
-                    context.startActivity(Intent(Intent.ACTION_DIAL, Uri.parse("tel:$it")))
+            MiracleIconButton(
+                icon = Icons.Rounded.Call,
+                contentDescription = stringResource(R.string.icon_call),
+                onClick = {
+                    convo?.address?.let {
+                        context.startActivity(Intent(Intent.ACTION_DIAL, Uri.parse("tel:$it")))
+                    }
                 }
-            }) { Icon(Icons.Rounded.Call, stringResource(R.string.icon_call)) }
+            )
 
             Box {
-                IconButton(onClick = onMenuToggle) {
-                    Icon(Icons.Rounded.MoreVert, stringResource(R.string.icon_more_options))
-                }
+                MiracleIconButton(
+                    icon = Icons.Rounded.MoreVert,
+                    contentDescription = stringResource(R.string.icon_more_options),
+                    onClick = onMenuToggle
+                )
                 DropdownMenu(
                     expanded = menuOpen,
                     onDismissRequest = onMenuDismiss,
