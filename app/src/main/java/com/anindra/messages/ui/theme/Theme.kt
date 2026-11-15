@@ -35,15 +35,15 @@ import com.anindra.messages.data.SettingsStore
 // ────────────────────────── Light scheme (seed #0B57D0) ─────────────────────────
 internal val LightColors = lightColorScheme(
     // Primary
-    primary = Color(0xFF0B57D0),
+    primary = Color(0xFF4058D8),
     onPrimary = Color(0xFFFFFFFF),
-    primaryContainer = Color(0xFFD3E3FD),
-    onPrimaryContainer = Color(0xFF041E49),
-    inversePrimary = Color(0xFFA8C7FA),
+    primaryContainer = Color(0xFFE1E6FF),
+    onPrimaryContainer = Color(0xFF101A4A),
+    inversePrimary = Color(0xFFBEC8FF),
     // Secondary
-    secondary = Color(0xFF575E71),
+    secondary = Color(0xFF5B6073),
     onSecondary = Color(0xFFFFFFFF),
-    secondaryContainer = Color(0xFFDBE2F9),
+    secondaryContainer = Color(0xFFE7E8EF),
     onSecondaryContainer = Color(0xFF141B2C),
     // Tertiary
     tertiary = Color(0xFF37618E),
@@ -56,11 +56,11 @@ internal val LightColors = lightColorScheme(
     errorContainer = Color(0xFFFFDAD6),
     onErrorContainer = Color(0xFF410002),
     // Surface & background
-    background = Color(0xFFF8F9FC),
+    background = Color(0xFFF7F7FA),
     onBackground = Color(0xFF1F1F1F),
-    surface = Color(0xFFF8F9FC),
+    surface = Color(0xFFF7F7FA),
     onSurface = Color(0xFF1F1F1F),
-    surfaceVariant = Color(0xFFE1E2EC),
+    surfaceVariant = Color(0xFFE7E7EC),
     onSurfaceVariant = Color(0xFF444746),
     outline = Color(0xFF74777F),
     outlineVariant = Color(0xFFC4C6D0),
@@ -68,25 +68,25 @@ internal val LightColors = lightColorScheme(
     inverseSurface = Color(0xFF2E3036),
     inverseOnSurface = Color(0xFFF0F0F7),
     // M3 surface container roles (tonal elevation ladder)
-    surfaceDim = Color(0xFFD8DAE0),
-    surfaceBright = Color(0xFFFCFCFE),
+    surfaceDim = Color(0xFFD9D9DF),
+    surfaceBright = Color(0xFFFFFFFF),
     surfaceContainerLowest = Color(0xFFFFFFFF),
-    surfaceContainerLow = Color(0xFFF2F3F9),
-    surfaceContainer = Color(0xFFECECF3),
-    surfaceContainerHigh = Color(0xFFE6E7ED),
-    surfaceContainerHighest = Color(0xFFE1E2E8)
+    surfaceContainerLow = Color(0xFFF0F0F5),
+    surfaceContainer = Color(0xFFECECF1),
+    surfaceContainerHigh = Color(0xFFE5E5EB),
+    surfaceContainerHighest = Color(0xFFDFE0E7)
 )
 
 // ────────────────────────── Dark scheme (seed #A8C7FA) ──────────────────────────
 internal val DarkColors = darkColorScheme(
-    primary = Color(0xFFA8C7FA),
-    onPrimary = Color(0xFF062E6F),
-    primaryContainer = Color(0xFF0842A0),
-    onPrimaryContainer = Color(0xFFD3E3FD),
-    inversePrimary = Color(0xFF0B57D0),
-    secondary = Color(0xFFBFC6DC),
+    primary = Color(0xFFBEC8FF),
+    onPrimary = Color(0xFF101735),
+    primaryContainer = Color(0xFF252F68),
+    onPrimaryContainer = Color(0xFFE1E6FF),
+    inversePrimary = Color(0xFF9EACFF),
+    secondary = Color(0xFFC5C6D2),
     onSecondary = Color(0xFF293041),
-    secondaryContainer = Color(0xFF3E4759),
+    secondaryContainer = Color(0xFF272932),
     onSecondaryContainer = Color(0xFFDAE2F9),
     tertiary = Color(0xFFA2CAFF),
     onTertiary = Color(0xFF00315B),
@@ -96,24 +96,24 @@ internal val DarkColors = darkColorScheme(
     onError = Color(0xFF690005),
     errorContainer = Color(0xFF93000A),
     onErrorContainer = Color(0xFFFFDAD6),
-    background = Color(0xFF131314),
+    background = Color(0xFF090A0F),
     onBackground = Color(0xFFE3E3E3),
-    surface = Color(0xFF131314),
+    surface = Color(0xFF090A0F),
     onSurface = Color(0xFFE3E3E3),
-    surfaceVariant = Color(0xFF44474F),
-    onSurfaceVariant = Color(0xFFC4C7C5),
+    surfaceVariant = Color(0xFF30313A),
+    onSurfaceVariant = Color(0xFFBFC0C8),
     outline = Color(0xFF8E9099),
-    outlineVariant = Color(0xFF44474E),
+    outlineVariant = Color(0xFF2A2B34),
     scrim = Color(0xFF000000),
     inverseSurface = Color(0xFFE3E2E6),
     inverseOnSurface = Color(0xFF2E3036),
-    surfaceDim = Color(0xFF131314),
-    surfaceBright = Color(0xFF39393C),
-    surfaceContainerLowest = Color(0xFF0E0E11),
-    surfaceContainerLow = Color(0xFF1B1B1D),
-    surfaceContainer = Color(0xFF1E1F20),
-    surfaceContainerHigh = Color(0xFF28292C),
-    surfaceContainerHighest = Color(0xFF333537)
+    surfaceDim = Color(0xFF090A0F),
+    surfaceBright = Color(0xFF25262F),
+    surfaceContainerLowest = Color(0xFF07080C),
+    surfaceContainerLow = Color(0xFF101117),
+    surfaceContainer = Color(0xFF15161D),
+    surfaceContainerHigh = Color(0xFF1B1C25),
+    surfaceContainerHighest = Color(0xFF23242D)
 )
 
 // ─────────────── AMOLED scheme (seed #A8C7FA) ───────────────
@@ -253,14 +253,15 @@ internal val DarkHighContrastColors = darkColorScheme(
 val AppMarkBlue = Color(0xFF0B57D0)
 
 // Semantic aliases so screens express intent, not raw colors.
-val ColorScheme.outgoingBubble: Color get() = primaryContainer          // GM blue bubble
-val ColorScheme.incomingBubble: Color get() = surfaceContainerHighest   // GM grey bubble
+// Miracle bubbles use quiet depth. Accent is reserved for outgoing identity.
+val ColorScheme.outgoingBubble: Color get() = primaryContainer
+val ColorScheme.incomingBubble: Color get() = surfaceContainerHigh
 // The composer's strip is the chat page's own colour, so the bar behind the
 // field is not a grey band inside a white screen. Dark keeps the raised
 // container, where the page is the darker one.
 val ColorScheme.chatBar: Color
-    get() = if (background.luminance() < 0.5f) surfaceContainerLow else background
-val ColorScheme.inputPill: Color get() = surfaceContainerHigh           // text field pill
+    get() = if (background.luminance() < 0.5f) surfaceContainerLowest else background
+val ColorScheme.inputPill: Color get() = surfaceContainerHighest           // text field pill
 
 /** WCAG relative-contrast ratio between two opaque colours. */
 internal fun contrastRatio(a: Color, b: Color): Float {
